@@ -1,0 +1,18 @@
+package data;
+
+public class Line {
+	public String text;
+
+	public Line(String text) {
+		super();
+		this.text = text;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+}
