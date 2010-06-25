@@ -20,7 +20,7 @@ public class FrameChat extends JFrame {
 	JPanel pnlEnvio = new JPanel();
 	public FrameChat() {
 		txtEnvio.setPreferredSize(new Dimension(500, 20));
-		txtRespuesta.setPreferredSize(new Dimension(800,600));
+		jspRespuesta.setPreferredSize(new Dimension(800,600));
 		jspRespuesta.getViewport().add(txtRespuesta);
 		pnlEnvio.setLayout(new FlowLayout());
 		pnlEnvio.add(txtEnvio);
@@ -30,7 +30,7 @@ public class FrameChat extends JFrame {
 		getContentPane().add(pnlEnvio, BorderLayout.SOUTH);
 		pack();
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public static void main(String[] args) {

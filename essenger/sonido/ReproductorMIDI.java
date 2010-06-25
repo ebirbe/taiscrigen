@@ -22,9 +22,6 @@ public class ReproductorMIDI {
 			seq.start();
 			System.out.println("Sorpresa para todos mis coetáneos");
 			System.out.println("Apretar CTRL-C para interrumpir");
-
-
-
 		}
 		catch(MidiUnavailableException ecc){
 			ecc.printStackTrace();
