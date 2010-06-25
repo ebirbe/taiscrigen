@@ -1,7 +1,7 @@
 package chat;
 
+import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -9,12 +9,12 @@ import java.net.UnknownHostException;
 public class Conector {
 	Socket s;
 	DataInputStream in;
-	DataOutputStream out;
+	BufferedOutputStream out;
 	
 	public Conector(String host, int port) throws UnknownHostException, IOException {
 		s = new Socket(host, port);
 		in = new DataInputStream(s.getInputStream());
-		out = new DataOutputStream(s.getOutputStream());
+		out = new BufferedOutputStream(s.getOutputStream());
 	}
 	
 	public String leerMensaje() throws IOException{
@@ -37,7 +37,7 @@ public class Conector {
 		boolean exito = true;
 		try {
 			for(int j=0;j < msg.length();j++){
-				out.write((int)msg.charAt(j));
+				out.write((byte)msg.charAt(j));
 			}
 			out.flush();
 		} catch (IOException ex) {

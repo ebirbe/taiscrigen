@@ -15,17 +15,18 @@ public class Chat {
 			f = new FrameChat();
 			c = new Conector("jakygps.no-ip.org", 9008);
 			//c = new Conector("jakyavl.homeip.net", 5001);
-			
+			//c = new Conector("190.75.108.225", 9008);
 			String m = "";
+			m = c.leerMensaje();
+			imprimir(m);
+			imprimir("Enviando inicio de sesion...");
+			if(c.enviarMensaje("Soy,jaky,QWPOM1FGTREHOR8WRFT"))
+				imprimir("Enviado con exito.\n");
+			else
+				imprimir("No se pudo enviar el inicio de sesion.\n");
 			while (true) {
 				m = c.leerMensaje();
 				imprimir(m);
-				
-				imprimir("Enviando inicio de sesion...");
-				if(c.enviarMensaje("Idenficacion,jaky,QWPOM1FGTREHOR8WRFT"))
-					imprimir("Enviado con exito.\n");
-				else
-					imprimir("No se pudo enviar el inicio de sesion.\n");
 			}
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
