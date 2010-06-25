@@ -20,7 +20,7 @@ public class Chat {
 			m = c.leerMensaje();
 			imprimir(m);
 			imprimir("Enviando inicio de sesion...");
-			if(c.enviarMensaje("Soy,jaky,QWPOM1FGTREHOR8WRFT"))
+			if(c.enviarMensaje("Idenficacion,jaky,QWPOM1FGTREHOR8WRFT"))
 				imprimir("Enviado con exito.\n");
 			else
 				imprimir("No se pudo enviar el inicio de sesion.\n");
@@ -32,10 +32,11 @@ public class Chat {
 			e.printStackTrace();
 			imprimir(e.toString());
 		} catch (IOException e) {
+			System.err.println(e.getCause());
 			e.printStackTrace();
 			imprimir(e.toString());
 		}finally{
-			System.exit(0);
+			//System.exit(0);
 		}
 	}
 	private static void imprimir(String msj){

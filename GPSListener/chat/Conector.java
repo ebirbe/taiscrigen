@@ -1,19 +1,19 @@
 package chat;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Conector {
 	Socket s;
-	DataInputStream in;
+	BufferedInputStream in;
 	BufferedOutputStream out;
 	
 	public Conector(String host, int port) throws UnknownHostException, IOException {
 		s = new Socket(host, port);
-		in = new DataInputStream(s.getInputStream());
+		in = new BufferedInputStream(s.getInputStream());
 		out = new BufferedOutputStream(s.getOutputStream());
 	}
 	
@@ -22,7 +22,7 @@ public class Conector {
 		while(true){
 			Character c = (char) in.read();
 			Integer inte = (int)c;
-			if(inte<0||inte>127) throw new IOException("Envio peticion de salida.");
+			if(inte<0||inte>127) throw new IOException("Envio caracter de salida. ("+inte+")");
 
 			msg += c.toString();
 			if(in.available() == 0 && !c.toString().equals("\n")){
