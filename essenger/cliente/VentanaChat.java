@@ -3,6 +3,8 @@ package essenger.cliente;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Label;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
@@ -14,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 
 import essenger.comandos.Comando;
 import essenger.ui.Util;
@@ -39,6 +42,8 @@ public class VentanaChat extends JFrame {
 	public VentanaChat() {
 		txtConectados.setEditable(false);
 		txtEntrada.setEditable(false);
+		txtEntrada.setLineWrap(true);
+		txtEntrada.setWrapStyleWord(true);
 		txtLogs.setEditable(false);
 		spConectados.getViewport().setLayout(new BorderLayout());
 		spConectados.getViewport().add(new Label("Conectados"), BorderLayout.NORTH);
@@ -60,6 +65,19 @@ public class VentanaChat extends JFrame {
 				// TODO Auto-generated method stub
 			}
 		});
+		spEntrada.addComponentListener(new ComponentListener() {
+			@Override
+			public void componentShown(ComponentEvent arg0) {}
+			@Override
+			public void componentResized(ComponentEvent arg0) {
+				txtEntrada.setSize(spEntrada.getWidth(), spEntrada.getViewport().getHeight());
+			}
+			@Override
+			public void componentMoved(ComponentEvent arg0) {}
+			@Override
+			public void componentHidden(ComponentEvent arg0) {}
+		});
+		spEntrada.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		spEntrada.getViewport().add(txtEntrada);
 		pnlMensajes.setLayout(new BorderLayout());
 		pnlMensajes.add(spEntrada, BorderLayout.CENTER);
@@ -83,10 +101,12 @@ public class VentanaChat extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(new Dimension(800,600));
 		setTitle("Essenger");
+		Util.centrarVentana(this);
 		setVisible(true);
 		txtEnvio.requestFocusInWindow();
 	}
 	protected void enviarComando() {
+		if(txtEnvio.getText().equals("")) return;
 		ClienteChat.c.enviarMensaje(Comando.hacerMensaje(txtEnvio.getText()));
 		txtEnvio.setText("");
 		txtEnvio.requestFocusInWindow();

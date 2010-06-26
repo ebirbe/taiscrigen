@@ -4,26 +4,37 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import essenger.comandos.Comando;
 
 public class ClienteChat {
 	static ConectorCliente c;
 	static VentanaChat v;
-	static PantallaNotificacion pn = new PantallaNotificacion();
+	static PantallaNotificacion pn = new PantallaNotificacion(v);
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch (ClassNotFoundException e) {e.printStackTrace();}
+		catch (InstantiationException e) {e.printStackTrace();} 
+		catch (IllegalAccessException e) {e.printStackTrace();} 
+		catch (UnsupportedLookAndFeelException e) {e.printStackTrace();}
+		try {
+
 			String m;
 			//c = new ConectorCliente("localhost", 6000);
 			c = new ConectorCliente("jakyavl.homeip.net", 6000);
 			v = new VentanaChat();
 			String nombre = "";
-			
+
 			while(nombre == ""){
-				nombre = JOptionPane.showInputDialog("Introduce tu nombre:");
+				nombre = JOptionPane.showInputDialog(v,"Introduce tu nombre:");
+				if(nombre == null) return;
 			}
 			c.enviarMensaje(Comando.hacerNombre(nombre));
 			while (true) {
