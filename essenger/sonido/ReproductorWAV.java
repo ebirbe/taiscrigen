@@ -59,7 +59,7 @@ public class ReproductorWAV {
 		}
 		catch(IOException ea){ea.printStackTrace();}
 	}
-	public void reproducir(){
+	public synchronized void reproducir(){
 		try {
 			aff=AudioSystem.getAudioFileFormat(temp);
 			ais=AudioSystem.getAudioInputStream(temp);
