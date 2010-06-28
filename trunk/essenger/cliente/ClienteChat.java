@@ -30,8 +30,8 @@ public class ClienteChat {
 		try {
 			pn = new PantallaNotificacion(v);
 			String m;
-			c = new ConectorCliente("localhost", 6000);
-			//c = new ConectorCliente("jakyavl.homeip.net", 6000);
+			//c = new ConectorCliente("localhost", 6000);
+			c = new ConectorCliente("jakyavl.homeip.net", 6000);
 			v = new VentanaChat();
 
 			while(nombre == ""){
