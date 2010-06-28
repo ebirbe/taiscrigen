@@ -119,48 +119,56 @@ public class  GPSHandler  extends Thread {
 			if(msg.indexOf(">REV44") > -1){
 				txt = "Rastreo Satelital:\rEl vehiculo " + cliente.id_vehiculo + " ha desactivado el Estacionmiento Seguro.\rwww.jaky47.com" + cliente.nota;
 				new HiloMensajero(GPSServer.stg, cliente.tlf_cliente, txt);
+				if(cliente.tlf_cliente2 != null) new HiloMensajero(GPSServer.stg, cliente.tlf_cliente, txt);
 				new HiloMensajero(GPSServer.stg, "04124662746", txt);
 			}
 			// Abandono GeoCerca.
 			if(msg.indexOf(">REV40") > -1){
 				txt = "Rastreo Satelital:\rEl vehiculo " + cliente.id_vehiculo + " ha abandonado la geocerca.\rwww.jaky47.com" + cliente.nota;
 				new HiloMensajero(GPSServer.stg, cliente.tlf_cliente, txt);
+				if(cliente.tlf_cliente2 != null) new HiloMensajero(GPSServer.stg, cliente.tlf_cliente, txt);
 				new HiloMensajero(GPSServer.stg, "04124662746", txt);
 			}
 			// Apagado Vehiculo Cerca Here
 			if(msg.indexOf(">REV42") > -1){
 				txt = "Rastreo Satelital:\rALERTA: El vehiculo " + cliente.id_vehiculo + " ha sido apagado por violar el Estacionamento Seguro.\rwww.jaky47.com" + cliente.nota;
 				new HiloMensajero(GPSServer.stg, cliente.tlf_cliente, txt);
+				if(cliente.tlf_cliente2 != null) new HiloMensajero(GPSServer.stg, cliente.tlf_cliente, txt);
 				new HiloMensajero(GPSServer.stg, "04124662746", txt);
 			}
 			// Activada Estacionamiento Seguro
 			if(msg.indexOf(">REV41") > -1){
 				txt = "Rastreo Satelital:\rEl vehiculo " + cliente.id_vehiculo + " ha activado el Estacionmiento Seguro.\rwww.jaky47.com" + cliente.nota;
 				new HiloMensajero(GPSServer.stg, cliente.tlf_cliente, txt);
+				if(cliente.tlf_cliente2 != null) new HiloMensajero(GPSServer.stg, cliente.tlf_cliente, txt);
 				new HiloMensajero(GPSServer.stg, "04124662746", txt);
 			}
 			// Remolcado
 			if(msg.indexOf(">REV14") > -1){
 				txt = "Rastreo Satelital:\rEsta siendo remolcado el vehiculo " + cliente.id_vehiculo + "\rwww.jaky47.com" + cliente.nota;
 				new HiloMensajero(GPSServer.stg, cliente.tlf_cliente, txt);
+				if(cliente.tlf_cliente2 != null) new HiloMensajero(GPSServer.stg, cliente.tlf_cliente, txt);
 				new HiloMensajero(GPSServer.stg, "04124662746", txt);
 			}
 			// Bateria DESconectada
 			if(msg.indexOf(">REV05") > -1){
 				txt = "Rastreo Satelital:\rBateria Desconectada en el vehiculo " + cliente.id_vehiculo + "\rwww.jaky47.com" + cliente.nota;
 				new HiloMensajero(GPSServer.stg, cliente.tlf_cliente, txt);
+				if(cliente.tlf_cliente2 != null) new HiloMensajero(GPSServer.stg, cliente.tlf_cliente, txt);
 				new HiloMensajero(GPSServer.stg, "04124662746", txt);
 			}
 			// Bateria Conectada
 			if(msg.indexOf(">REV04") > -1){
 				txt = "Rastreo Satelital:\rBateria conectada en el vehiculo " + cliente.id_vehiculo + "\rwww.jaky47.com " + cliente.nota;
 				new HiloMensajero(GPSServer.stg, cliente.tlf_cliente, txt);
+				if(cliente.tlf_cliente2 != null) new HiloMensajero(GPSServer.stg, cliente.tlf_cliente, txt);
 				new HiloMensajero(GPSServer.stg, "04124662746", txt);
 			}
 			// Panico
 			if(msg.indexOf(">REV03") > -1){
 				txt = "Rastreo Satelital:\rALERTA: Boton de panico presionado en el vehiculo " + cliente.id_vehiculo + "\rwww.jaky47.com" + cliente.nota;
 				new HiloMensajero(GPSServer.stg, cliente.tlf_cliente, txt);
+				if(cliente.tlf_cliente2 != null) new HiloMensajero(GPSServer.stg, cliente.tlf_cliente, txt);
 				new HiloMensajero(GPSServer.stg, "04124662746", txt);
 			}
 		}catch (NumberFormatException e) {

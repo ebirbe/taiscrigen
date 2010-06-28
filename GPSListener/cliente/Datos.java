@@ -3,6 +3,7 @@ package cliente;
 public class Datos {
 	public int id_vehiculo;
 	public String tlf_cliente;
+	public String tlf_cliente2;
 	public String nota = "";
 	public Datos(int id) {
 		switch (id) {
@@ -24,6 +25,7 @@ public class Datos {
 		case 3212:// Transman
 			this.id_vehiculo = id;
 			this.tlf_cliente = "04143441739";
+			this.tlf_cliente2 = "04145989331";
 			break;
 		case 3206:// Luis Perera
 			this.id_vehiculo = id;
