@@ -3,7 +3,6 @@ package essenger.cliente;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Label;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -23,7 +22,6 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.DefaultCaret;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
@@ -45,7 +43,6 @@ public class VentanaChat extends JFrame {
 	JTextArea txtConectados = new JTextArea();
 	JTabbedPane tp = new JTabbedPane();
 	JScrollPane spEntrada = new JScrollPane();
-	//JTextArea txtEntrada = new JTextArea();
 	JTextPane txtEntrada = new JTextPane();
 	StyledDocument doc = txtEntrada.getStyledDocument(); 
 	JTextField txtEnvio = new JTextField();
@@ -70,9 +67,7 @@ public class VentanaChat extends JFrame {
 		spConectados.setPreferredSize(new Dimension(150,0));
 		txtEnvio.addKeyListener(new KeyListener() {
 			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-			}
+			public void keyTyped(KeyEvent e) {}
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
@@ -80,9 +75,7 @@ public class VentanaChat extends JFrame {
 				}
 			}
 			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-			}
+			public void keyPressed(KeyEvent e) {}
 		});
 		spEntrada.addComponentListener(new ComponentListener() {
 			@Override
@@ -160,24 +153,7 @@ public class VentanaChat extends JFrame {
 					}
 				}while(!coincide.hitEnd());
 				doc.insertString(doc.getLength(), "\n", doc.getStyle("regular"));
-			
-			/*String aux = msg.replace("\t", " ");
-			for(String s : aux.split(" ")){
-				if(s.toUpperCase().equals(nombre.toUpperCase())){
-					
-				}else{
-					doc.insertString(doc.getLength(), s,doc.getStyle("regular"));
-				}
-				doc.insertString(doc.getLength(), " ",doc.getStyle("regular"));
-			}
-			doc.insertString(doc.getLength(), "\n",doc.getStyle("regular"));
-			txtEntrada.getCaret().setDot(txtEntrada.getDocument().getLength());
-			((DefaultCaret) txtEntrada.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-*/
-		} catch (BadLocationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (BadLocationException e) {e.printStackTrace();}
 	}
 	public void agregarLog(String msg){
 		agregar(msg, txtLogs, spLogs);
