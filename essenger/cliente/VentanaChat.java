@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultCaret;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
@@ -153,6 +154,8 @@ public class VentanaChat extends JFrame {
 					}
 				}while(!coincide.hitEnd());
 				doc.insertString(doc.getLength(), "\n", doc.getStyle("regular"));
+				txtEntrada.getCaret().setDot(txtEntrada.getDocument().getLength());
+                ((DefaultCaret) txtEntrada.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		} catch (BadLocationException e) {e.printStackTrace();}
 	}
 	public void agregarLog(String msg){
