@@ -2,6 +2,7 @@ package essenger.cliente;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -16,15 +17,18 @@ import essenger.ui.Util;
 
 public class PantallaNotificacion extends Thread {
 	static ReproductorWAV sonido;
-	boolean activo;
+	private static boolean hayHilo = false;
+	private static final int TIEMPO_MAXIMO = 15;
+	private static int t = TIEMPO_MAXIMO;
+	boolean activo = false;
 	public boolean isActivo() {
 		return activo;
 	}
 	String mensaje = "";
 	JWindow frame;
-	JPanel pnlMsg = new JPanel();
-	JWindow vtnNot;
+	JPanel pnlMsg;
 	public PantallaNotificacion(JFrame parent) {
+		pnlMsg = new JPanel();
 		sonido = new ReproductorWAV();
 		frame = new JWindow(parent);
 		CardLayout cLay = new CardLayout();
@@ -54,6 +58,7 @@ public class PantallaNotificacion extends Thread {
 		frame.setLayout(cLay);
 	}
 	public void insertarTexto(String msg){
+		//if(!activo) pnlMsg.add(time);
 		if(msg.indexOf("\t") > -1){
 			final int TOPE = 70;
 			int max;
@@ -73,19 +78,19 @@ public class PantallaNotificacion extends Thread {
 		cerrar();
 	}
 	private void mostrar(){
-		sonido.reproducir();
 		frame.pack();
 		Util.pantallaInferiorDerecha(frame);
 		frame.setVisible(true);
 		activo = true;
-		new Contador(this).start();
+		new Contador().start();
 		new AlternadorDeTitulo().start();
+		new Sonido().start();
 	}
 
 	private void cerrar() {
+		activo = false;
 		frame.setVisible(false);
 		pnlMsg.removeAll();
-		activo = false;
 	}
 	public static void main(String[] args) {
 		System.out.println("");
@@ -98,21 +103,26 @@ public class PantallaNotificacion extends Thread {
 	}
 
 	private class Contador extends Thread{
-		private PantallaNotificacion pantallaNotificacion;
-		public Contador(PantallaNotificacion pantallaNotificacion) {
-			this.pantallaNotificacion = pantallaNotificacion;
-		}
-
 		@Override
 		public void run() {
-			super.run();
+			t = TIEMPO_MAXIMO;
+			if (hayHilo) return;
+			hayHilo = true;
 			try {
-				sleep(5000);
-				pantallaNotificacion.cerrar();
-			} catch (InterruptedException e) {e.printStackTrace();}
+				System.out.print(t+"-");
+				while(t >= 0 && activo){
+					sleep(1000);
+					t--;
+				}
+				cerrar();
+			}
+			catch (InterruptedException e) {e.printStackTrace();}
+			hayHilo = false;
 		}
 	}
-
+	private class Sonido extends Thread{
+		public void run() {sonido.reproducir();};
+	}
 	private class AlternadorDeTitulo extends Thread{
 		@Override
 		public void run() {
@@ -120,9 +130,9 @@ public class PantallaNotificacion extends Thread {
 				String tit = ClienteChat.v.getTitle();
 				while(!ClienteChat.v.isEnfocada()){
 					ClienteChat.v.setTitle("Nuevo Mensaje");
-					sleep(1000);
+					sleep(2000);
 					ClienteChat.v.setTitle(tit);
-					sleep(1000);
+					sleep(2000);
 				}
 				// Devolvemos el titulo anterior
 				ClienteChat.v.setTitle(tit);

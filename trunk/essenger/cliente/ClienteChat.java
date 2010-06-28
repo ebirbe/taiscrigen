@@ -12,11 +12,14 @@ import essenger.comandos.Comando;
 public class ClienteChat {
 	static ConectorCliente c;
 	static VentanaChat v;
-	static PantallaNotificacion pn = new PantallaNotificacion(v);
+	static PantallaNotificacion pn;
+	public static boolean abierto = false;
+	static String nombre = "";
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		if(ClienteChat.abierto) System.out.println("chao");
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		}
@@ -25,16 +28,20 @@ public class ClienteChat {
 		catch (IllegalAccessException e) {e.printStackTrace();} 
 		catch (UnsupportedLookAndFeelException e) {e.printStackTrace();}
 		try {
-
+			pn = new PantallaNotificacion(v);
 			String m;
-			//c = new ConectorCliente("localhost", 6000);
-			c = new ConectorCliente("jakyavl.homeip.net", 6000);
+			c = new ConectorCliente("localhost", 6000);
+			//c = new ConectorCliente("jakyavl.homeip.net", 6000);
 			v = new VentanaChat();
-			String nombre = "";
 
 			while(nombre == ""){
 				nombre = JOptionPane.showInputDialog(v,"Introduce tu nombre:");
 				if(nombre == null) return;
+				String aux = "";
+				for(String s : nombre.split(" ")){
+					aux += s;
+				}
+				nombre = aux;
 			}
 			c.enviarMensaje(Comando.hacerNombre(nombre));
 			while (true) {
@@ -56,7 +63,7 @@ public class ClienteChat {
 			msg = msg.substring(5);
 			if(msg.startsWith(Comando.MENSAJE)){
 				msg = msg.substring(msg.indexOf("=")+1);
-				v.agregarMensaje(msg);
+				v.agregarMensaje(msg, nombre);
 				notificar(msg);
 				return;
 			}

@@ -1,7 +1,9 @@
 package essenger.cliente;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Label;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -9,6 +11,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,7 +20,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultCaret;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+import javax.swing.text.StyledDocument;
 
 import essenger.comandos.Comando;
 import essenger.ui.Util;
@@ -34,21 +45,29 @@ public class VentanaChat extends JFrame {
 	JTextArea txtConectados = new JTextArea();
 	JTabbedPane tp = new JTabbedPane();
 	JScrollPane spEntrada = new JScrollPane();
-	JTextArea txtEntrada = new JTextArea();
+	//JTextArea txtEntrada = new JTextArea();
+	JTextPane txtEntrada = new JTextPane();
+	StyledDocument doc = txtEntrada.getStyledDocument(); 
 	JTextField txtEnvio = new JTextField();
 	JPanel pnlMensajes = new JPanel();
 	JScrollPane spLogs = new JScrollPane();
 	JTextArea txtLogs = new JTextArea();
 	public VentanaChat() {
+		Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
+		StyleConstants.setFontSize(def, 14);
+		StyleConstants.setFontFamily(def, "Sans");
+		Style regular = doc.addStyle("regular", def);
+		Style s = doc.addStyle("bold", regular);
+        StyleConstants.setBold(s, true);
+        StyleConstants.setForeground(s, Color.BLUE);
+        
 		txtConectados.setEditable(false);
 		txtEntrada.setEditable(false);
-		txtEntrada.setLineWrap(true);
-		txtEntrada.setWrapStyleWord(true);
 		txtLogs.setEditable(false);
 		spConectados.getViewport().setLayout(new BorderLayout());
 		spConectados.getViewport().add(new Label("Conectados"), BorderLayout.NORTH);
 		spConectados.getViewport().add(txtConectados, BorderLayout.CENTER);
-		spConectados.setPreferredSize(new Dimension(100,0));
+		spConectados.setPreferredSize(new Dimension(150,0));
 		txtEnvio.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -118,8 +137,47 @@ public class VentanaChat extends JFrame {
 		txtConectados.setText("");
 		agregar(msg, txtConectados, spConectados);
 	}
-	public void agregarMensaje(String msg){
-		agregar(msg, txtEntrada, spEntrada);
+	public void agregarMensaje(String msg, String nombre){
+		try {
+				Pattern p = Pattern.compile(nombre, Pattern.CASE_INSENSITIVE);
+				Matcher coincide = p.matcher(msg);
+				int primero = 0, ultimo = msg.length();
+				do{
+					if(coincide.find()){
+						ultimo = coincide.start();
+						
+						String previo = msg.substring(primero, ultimo);
+						String resaltado = msg.substring(coincide.start(), coincide.end());
+						
+						doc.insertString(doc.getLength(), previo, doc.getStyle("regular"));
+						doc.insertString(doc.getLength(), resaltado, doc.getStyle("bold"));
+						
+						primero = coincide.end();
+						ultimo = msg.length();
+					}else{
+						String texto = msg.substring(primero, ultimo);
+						doc.insertString(doc.getLength(), texto, doc.getStyle("regular"));
+					}
+				}while(!coincide.hitEnd());
+				doc.insertString(doc.getLength(), "\n", doc.getStyle("regular"));
+			
+			/*String aux = msg.replace("\t", " ");
+			for(String s : aux.split(" ")){
+				if(s.toUpperCase().equals(nombre.toUpperCase())){
+					
+				}else{
+					doc.insertString(doc.getLength(), s,doc.getStyle("regular"));
+				}
+				doc.insertString(doc.getLength(), " ",doc.getStyle("regular"));
+			}
+			doc.insertString(doc.getLength(), "\n",doc.getStyle("regular"));
+			txtEntrada.getCaret().setDot(txtEntrada.getDocument().getLength());
+			((DefaultCaret) txtEntrada.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+*/
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public void agregarLog(String msg){
 		agregar(msg, txtLogs, spLogs);
