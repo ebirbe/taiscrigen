@@ -3,6 +3,8 @@ package chat;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
+import log.MyLogger;
+
 public class Chat {
 	
 	static FrameChat f;
@@ -41,5 +43,6 @@ public class Chat {
 	}
 	private static void imprimir(String msj){
 		f.txtRespuesta.append(msj);
+		MyLogger.escribirLog(msj);
 	}
 }

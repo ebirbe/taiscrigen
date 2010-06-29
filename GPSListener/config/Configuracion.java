@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import log.MyLogger;
+
 public class Configuracion extends Properties{
 	private static final long serialVersionUID = -6962968299670902858L;
 	private final String nombreArchivo = "gpslistener.conf";
@@ -61,8 +63,10 @@ public class Configuracion extends Properties{
 			setHostPort(Integer.parseInt((String) get(keyHostPort)));
 			setGsmDevice((String) get(keyGsmDevice));
 		} catch (FileNotFoundException e) {
+			MyLogger.escribirLog(e.toString());
 			e.printStackTrace();
 		} catch (IOException e) {
+			MyLogger.escribirLog(e.toString());
 			e.printStackTrace();
 		}
 	}
@@ -72,8 +76,10 @@ public class Configuracion extends Properties{
 			flujoSalida = new FileOutputStream(nombreArchivo);
 			store(flujoSalida, "Archivo de Configuracion para gpslistener.");
 		} catch (FileNotFoundException e) {
+			MyLogger.escribirLog(e.toString());
 			e.printStackTrace();
 		} catch (IOException e) {
+			MyLogger.escribirLog(e.toString());
 			e.printStackTrace();
 		}
 	}

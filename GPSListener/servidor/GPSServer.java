@@ -11,6 +11,8 @@ import javax.comm.PortInUseException;
 import javax.comm.UnsupportedCommOperationException;
 import javax.swing.JOptionPane;
 
+import log.MyLogger;
+
 import sms.SerialToGsm;
 
 public class  GPSServer  {
@@ -27,15 +29,19 @@ public class  GPSServer  {
 			stg = new SerialToGsm(GsmModemPort);
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Error de entrada/salida en el dispositivo GSM Modem.", e.toString(), JOptionPane.ERROR_MESSAGE);
+			MyLogger.escribirLog(e.toString());
 			e.printStackTrace();
 		} catch (NoSuchPortException e) {
 			JOptionPane.showMessageDialog(null, "El dispositivo GSM Modem no ha sido hayado.", e.toString(), JOptionPane.ERROR_MESSAGE);
+			MyLogger.escribirLog(e.toString());
 			e.printStackTrace();
 		} catch (PortInUseException e) {
 			JOptionPane.showMessageDialog(null, "El dispositivo GSM Modem esta siendo usado por otra aplicacion.", e.toString(), JOptionPane.ERROR_MESSAGE);
+			MyLogger.escribirLog(e.toString());
 			e.printStackTrace();
 		} catch (UnsupportedCommOperationException e) {
 			JOptionPane.showMessageDialog(null, "Se ha solicitado una operacion no soportada por el puerto serial.", e.toString(), JOptionPane.ERROR_MESSAGE);
+			MyLogger.escribirLog(e.toString());
 			e.printStackTrace();
 		}
 
@@ -51,12 +57,13 @@ public class  GPSServer  {
 				GPSHandler gps = new GPSHandler(client);
 				addConectados(client.getInetAddress().toString(), gps);
 				gps.start();
-				System.out.println ("Entro " + client.getInetAddress ());
+				MyLogger.escribirLog("Entro " + client.getInetAddress ());
 				GPSServer.wp.lblStatus.setText("Entro " + client.getInetAddress ());
 			}
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Error de entrada/salida escuchando puerto de internet.", e.toString(), JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
+			MyLogger.escribirLog(e.toString());
 		}
 	}
 	public static void removeConectados(int index){

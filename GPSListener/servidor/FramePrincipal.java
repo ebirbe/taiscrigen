@@ -31,6 +31,8 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 
+import log.MyLogger;
+
 public class FramePrincipal extends JFrame {
 	private static final long serialVersionUID = -1386212642735384242L;
 	
@@ -314,7 +316,7 @@ public class FramePrincipal extends JFrame {
 			taPrivado.append(cmd+"\n");
 			txtComando.setText("");
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			MyLogger.escribirLog(e.getMessage());
 			boolean encontrado = false;
 			for(i = 0; i < lstConectados.getModel().getSize(); i++) {
 				if(lstConectados.getModel().getElementAt(i).equals(valorSeleccionado)){
