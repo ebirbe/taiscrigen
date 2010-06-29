@@ -1,5 +1,6 @@
 package sms;
 
+import log.MyLogger;
 import servidor.GPSServer;
 
 public class HiloMensajero extends Thread {
@@ -16,10 +17,10 @@ public class HiloMensajero extends Thread {
 	}
 
 	public void run(){
-		System.out.println("Hilo de Mensaje Iniciado.");
+		MyLogger.escribirLog("Hilo de Mensaje Iniciado.");
 		GPSServer.wp.lblStatus.setText("Hilo de Mensaje Iniciado.");
 		stg.sendSms(numero, msg);
-		System.out.println("Hilo de Mensaje Terminado.");
+		MyLogger.escribirLog("Hilo de Mensaje Terminado.");
 		GPSServer.wp.lblStatus.setText("Hilo de Mensaje Terminado.");
 	}
 }

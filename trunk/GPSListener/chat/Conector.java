@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import log.MyLogger;
+
 public class Conector {
 	Socket s;
 	BufferedInputStream in;
@@ -41,6 +43,7 @@ public class Conector {
 			}
 			out.flush();
 		} catch (IOException ex) {
+			MyLogger.escribirLog(ex.toString());
 			ex.printStackTrace();
 			exito = false;
 		}

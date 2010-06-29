@@ -1,5 +1,6 @@
 package servidor;
 
+import log.MyLogger;
 import config.Configuracion;
 
 public class GPSListener {
@@ -8,6 +9,10 @@ public class GPSListener {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		MyLogger.escribirLog("###################################################################");
+		MyLogger.escribirLog("#######################INICIANDO GPSLISTENER#######################");
+		MyLogger.escribirLog("###################################################################");
+		
 		if(args.length > 0){
 			if(args[0].equals("--config")){
 				new FrameConfServidor(config);
@@ -24,8 +29,8 @@ public class GPSListener {
 	}
 
 	private static void iniciarServidor() {
-		System.out.println("Puerto de Internet: "+config.getHostPort());
-		System.out.println("Dispositivo SMS: "+config.getGsmDevice());
+		MyLogger.escribirLog("Puerto de Internet: "+config.getHostPort());
+		MyLogger.escribirLog("Dispositivo SMS: "+config.getGsmDevice());
 		new GPSServer(config.getHostPort(), config.getGsmDevice());
 	}
 }
