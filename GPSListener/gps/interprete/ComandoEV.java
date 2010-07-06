@@ -1,8 +1,10 @@
 package gps.interprete;
 
 public class ComandoEV extends Comando {
-	
-	private String codigoEvento, fecha, diaDeSemana,hora, latitud, longitud, velocidad, direccion,  edad, fuente;
+
+	private String codigoEvento, fecha, diaDeSemana, hora, latitud, longitud,
+			velocidad, direccion, edad, fuente;
+
 	public String getCodigoEvento() {
 		return codigoEvento;
 	}
@@ -96,31 +98,32 @@ public class ComandoEV extends Comando {
 	@Override
 	public void desglosarComando() {
 		// AA BBBB C DDDDD EEEFFFFF GGGGHHHHH III JJJ K L [EXTENDED-EV TAGS]
-		codigoEvento = texto.substring(0,2);
+		codigoEvento = texto.substring(0, 2);
 		fecha = texto.substring(2, 12);
 		diaDeSemana = texto.substring(6, 7);
-		hora = calcularHora(texto.substring(7,12));
-		latitud = texto.substring(12,20);
-		longitud = texto.substring(20,29);
-		velocidad = texto.substring(29,32);
-		direccion = texto.substring(32,35);
-		fuente = texto.substring(35,36);
-		edad = texto.substring(36,37);
+		hora = calcularHora(texto.substring(7, 12));
+		latitud = texto.substring(12, 20);
+		longitud = texto.substring(20, 29);
+		velocidad = texto.substring(29, 32);
+		direccion = texto.substring(32, 35);
+		fuente = texto.substring(35, 36);
+		edad = texto.substring(36, 37);
 	}
-	
+
 	@Override
 	public String imprimir() {
-		
-		impresion ="";
-		impresion += "Evento: "+codigoEvento+"\n";
-		impresion += "Fecha: "+calcularFecha(fecha)+"\n";
-		impresion += "Latitud: "+latitud+"\n";
-		impresion += "Longitud: "+longitud+"\n";
-		impresion += "Velocidad: "+obtenerVelocidad(velocidad)+" Km/h\n";
-		impresion += "Direccion: "+Integer.parseInt(direccion)+"º ("+obtenerDireccion(direccion)+")\n";
-		impresion += "Fuente: "+obtenerFuente(fuente)+"\n";
-		impresion += "Edad: "+obtenerEdad(edad)+"\n";
-		
+
+		impresion = "";
+		impresion += "Evento: " + codigoEvento + "\n";
+		impresion += "Fecha: " + calcularFecha(fecha) + "\n";
+		impresion += "Latitud: " + latitud + "\n";
+		impresion += "Longitud: " + longitud + "\n";
+		impresion += "Velocidad: " + obtenerVelocidad(velocidad) + " Km/h\n";
+		impresion += "Direccion: " + Integer.parseInt(direccion) + "º ("
+				+ obtenerDireccion(direccion) + ")\n";
+		impresion += "Fuente: " + obtenerFuente(fuente) + "\n";
+		impresion += "Edad: " + obtenerEdad(edad) + "\n";
+
 		return impresion;
 	}
 }

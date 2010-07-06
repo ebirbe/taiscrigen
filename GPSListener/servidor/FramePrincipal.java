@@ -38,14 +38,15 @@ import log.MyLogger;
 
 public class FramePrincipal extends JFrame {
 	private static final long serialVersionUID = -1386212642735384242L;
-	
+
 	JMenuBar menuBar = new JMenuBar();
 	JMenu mnAcciones = new JMenu("Acciones");
 	JMenuItem mniSalir = new JMenuItem("Salir");
 	JMenuItem mniBorrar = new JMenuItem("Borrar");
 	JMenu mnOpciones = new JMenu("Opciones");
-	public JCheckBoxMenuItem chkMniAutoScrool = new JCheckBoxMenuItem("Autoscroll", true);
-	
+	public JCheckBoxMenuItem chkMniAutoScrool = new JCheckBoxMenuItem(
+			"Autoscroll", true);
+
 	JLabel lblConectados = new JLabel("Conectados");
 	JScrollPane spConectados = new JScrollPane();
 	JPanel pnlLateral = new JPanel();
@@ -72,12 +73,13 @@ public class FramePrincipal extends JFrame {
 	JButton btnU010 = new JButton("Est. OFF");
 	JLabel lblPara = new JLabel();
 	JTextField txtComando = new JTextField();
-	JCheckBoxMenuItem chkForzarMayuscula = new JCheckBoxMenuItem("Mayuscula", true);
+	JCheckBoxMenuItem chkForzarMayuscula = new JCheckBoxMenuItem("Mayuscula",
+			true);
 	JButton btnEnviar = new JButton("Enviar");
 	JPanel pnlEnvio = new JPanel();
 	public JLabel lblStatus = new JLabel();
 	JPanel pnlStatus = new JPanel();
-	
+
 	JTabbedPane tpnlContenido = new JTabbedPane();
 	PanelChat pnlForaneo = new PanelChat();
 
@@ -105,13 +107,13 @@ public class FramePrincipal extends JFrame {
 		mnOpciones.add(chkForzarMayuscula);
 		menuBar.add(mnAcciones);
 		menuBar.add(mnOpciones);
-		
+
 		btnActivar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(btnActivar.isSelected()){
+				if (btnActivar.isSelected()) {
 					seleccionarEquipo();
-				}else{
+				} else {
 					deseleccionarEquipo();
 				}
 			}
@@ -125,7 +127,7 @@ public class FramePrincipal extends JFrame {
 		spConectados.getViewport().add(pnlLateral);
 		spConectados.setPreferredSize(new Dimension(200, 100));
 		taEntrada.setEditable(false);
-		spEntrada.setPreferredSize(new Dimension(100,400));
+		spEntrada.setPreferredSize(new Dimension(100, 400));
 		spEntrada.getViewport().add(taEntrada);
 		pnlEntrada.setLayout(new BorderLayout());
 		pnlEntrada.add(new JLabel("General"), BorderLayout.NORTH);
@@ -156,8 +158,10 @@ public class FramePrincipal extends JFrame {
 		btnXp11.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int op = JOptionPane.showConfirmDialog(FramePrincipal.this, "Seguro que desea apagar este vehiculo?", "Apagado Directo", JOptionPane.OK_CANCEL_OPTION);
-				if(op == JOptionPane.OK_OPTION){
+				int op = JOptionPane.showConfirmDialog(FramePrincipal.this,
+						"Seguro que desea apagar este vehiculo?",
+						"Apagado Directo", JOptionPane.OK_CANCEL_OPTION);
+				if (op == JOptionPane.OK_OPTION) {
 					txtComando.setText("SSSXP11");
 					enviarComando();
 				}
@@ -173,8 +177,10 @@ public class FramePrincipal extends JFrame {
 		btnU001.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int op = JOptionPane.showConfirmDialog(FramePrincipal.this, "Seguro que desea apagar este vehiculo?", "Apagado Seguro", JOptionPane.OK_CANCEL_OPTION);
-				if(op == JOptionPane.OK_OPTION){
+				int op = JOptionPane.showConfirmDialog(FramePrincipal.this,
+						"Seguro que desea apagar este vehiculo?",
+						"Apagado Seguro", JOptionPane.OK_CANCEL_OPTION);
+				if (op == JOptionPane.OK_OPTION) {
 					txtComando.setText("SSSU001");
 					enviarComando();
 				}
@@ -183,8 +189,10 @@ public class FramePrincipal extends JFrame {
 		btnU011.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int op = JOptionPane.showConfirmDialog(FramePrincipal.this, "Activar estacionamiento seguro para este vehiculo?", null, JOptionPane.OK_CANCEL_OPTION);
-				if(op == JOptionPane.OK_OPTION){
+				int op = JOptionPane.showConfirmDialog(FramePrincipal.this,
+						"Activar estacionamiento seguro para este vehiculo?",
+						null, JOptionPane.OK_CANCEL_OPTION);
+				if (op == JOptionPane.OK_OPTION) {
 					txtComando.setText("SSSU011");
 					enviarComando();
 				}
@@ -193,8 +201,12 @@ public class FramePrincipal extends JFrame {
 		btnU010.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int op = JOptionPane.showConfirmDialog(FramePrincipal.this, "Desactivar estacionamiento seguro para este vehiculo?", null, JOptionPane.OK_CANCEL_OPTION);
-				if(op == JOptionPane.OK_OPTION){
+				int op = JOptionPane
+						.showConfirmDialog(
+								FramePrincipal.this,
+								"Desactivar estacionamiento seguro para este vehiculo?",
+								null, JOptionPane.OK_CANCEL_OPTION);
+				if (op == JOptionPane.OK_OPTION) {
 					txtComando.setText("SSSU010");
 					enviarComando();
 				}
@@ -231,15 +243,19 @@ public class FramePrincipal extends JFrame {
 		splPanel.add(splPanel2, JSplitPane.RIGHT);
 		txtComando.addKeyListener(new KeyListener() {
 			@Override
-			public void keyTyped(KeyEvent e) {}
+			public void keyTyped(KeyEvent e) {
+			}
+
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER){
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					enviarComando();
 				}
 			}
+
 			@Override
-			public void keyPressed(KeyEvent arg0) {}
+			public void keyPressed(KeyEvent arg0) {
+			}
 		});
 		btnEnviar.addActionListener(new ActionListener() {
 			@Override
@@ -247,7 +263,7 @@ public class FramePrincipal extends JFrame {
 				enviarComando();
 			}
 		});
-		lblStatus.setPreferredSize(new Dimension(0,20));
+		lblStatus.setPreferredSize(new Dimension(0, 20));
 		pnlStatus.add(lblStatus);
 		tpnlContenido.add("Transmsiones Locales", splPanel);
 		tpnlContenido.add("Transmsiones Foraneas", pnlForaneo);
@@ -267,35 +283,42 @@ public class FramePrincipal extends JFrame {
 			frameSize.width = screenSize.width;
 		}
 		// Center the window
-		setLocation((screenSize.width - frameSize.width)/2, (screenSize.height - frameSize.height)/2);
+		setLocation((screenSize.width - frameSize.width) / 2,
+				(screenSize.height - frameSize.height) / 2);
 		// Close the window
-		addWindowListener(new WindowAdapter() { public void windowClosing(WindowEvent e) { System.exit(0); } });
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
 		setVisible(true);
 	}
 
-	void seleccionarEquipo(){
+	void seleccionarEquipo() {
 		try {
 			indiceSeleccionado = lstConectados.getSelectedIndex();
 			valorSeleccionado = lstConectados.getSelectedValue().toString();
 
 			GPSServer.gpsh.get(lstConectados.getSelectedIndex()).privado = true;
 
-			lblPara.setText("Mensaje para el GPS " + lstConectados.getSelectedValue().toString()+": ");
+			lblPara.setText("Mensaje para el GPS "
+					+ lstConectados.getSelectedValue().toString() + ": ");
 			pnlPrivado.setVisible(true);
 			splPanel2.setDividerLocation(0.2);
 			lstConectados.setEnabled(false);
 			txtComando.requestFocusInWindow();
 			btnActivar.setText("Desactivar");
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Selecione un item de la lista.");
+			JOptionPane.showMessageDialog(null,
+					"Selecione un item de la lista.");
 			btnActivar.setSelected(false);
 		}
 	}
 
-	void deseleccionarEquipo(){
-		try{
+	void deseleccionarEquipo() {
+		try {
 			GPSServer.gpsh.get(indiceSeleccionado).privado = false;
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.getCause();
 			e.getMessage();
 		}
@@ -308,35 +331,39 @@ public class FramePrincipal extends JFrame {
 		btnActivar.setSelected(false);
 	}
 
-	void enviarComando(){
+	void enviarComando() {
 		int i;
 
 		String cmd;
-		if(chkForzarMayuscula.isSelected())
-			cmd = ">"+txtComando.getText().toUpperCase()+"<";
+		if (chkForzarMayuscula.isSelected())
+			cmd = ">" + txtComando.getText().toUpperCase() + "<";
 		else
-			cmd = ">"+txtComando.getText()+"<";
+			cmd = ">" + txtComando.getText() + "<";
 
 		try {
-			if(!GPSServer.gpsh.get(indiceSeleccionado).name.equals(valorSeleccionado))
-				throw new Exception("El GPS solicitado cambio de ID en la lista.");
+			if (!GPSServer.gpsh.get(indiceSeleccionado).name
+					.equals(valorSeleccionado))
+				throw new Exception(
+						"El GPS solicitado cambio de ID en la lista.");
 			GPSServer.gpsh.get(indiceSeleccionado).enviarMensaje(cmd);
-			taPrivado.append(cmd+"\n");
+			taPrivado.append(cmd + "\n");
 			txtComando.setText("");
 		} catch (Exception e) {
-			MyLogger.escribirLog(this.getClass().getName(),e.getMessage());
+			MyLogger.escribirLog(this.getClass().getName(), e.getMessage());
 			boolean encontrado = false;
-			for(i = 0; i < lstConectados.getModel().getSize(); i++) {
-				if(lstConectados.getModel().getElementAt(i).equals(valorSeleccionado)){
+			for (i = 0; i < lstConectados.getModel().getSize(); i++) {
+				if (lstConectados.getModel().getElementAt(i)
+						.equals(valorSeleccionado)) {
 					indiceSeleccionado = i;
 					encontrado = true;
 					break;
 				}
 			}
-			if(!encontrado){
-				JOptionPane.showMessageDialog(null, "El equipo parece haberse desconectado.");
+			if (!encontrado) {
+				JOptionPane.showMessageDialog(null,
+						"El equipo parece haberse desconectado.");
 				deseleccionarEquipo();
-			}else{
+			} else {
 				lstConectados.setSelectedIndex(i);
 				seleccionarEquipo();
 				enviarComando();
@@ -346,6 +373,6 @@ public class FramePrincipal extends JFrame {
 
 	public static void main(String[] args) {
 		FramePrincipal f = new FramePrincipal();
-		f.lstConectados.setListData(new String[]{"hola", "mundo"});
+		f.lstConectados.setListData(new String[] { "hola", "mundo" });
 	}
 }

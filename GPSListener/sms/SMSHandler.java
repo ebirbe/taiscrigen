@@ -12,8 +12,9 @@ public class SMSHandler {
 	public SMSHandler() {
 		// TODO Auto-generated constructor stub
 	}
+
 	public static void main(String[] args) {
-		//new SMSClient(0).sendMessage("04128663381", "Prueba Java!");
+		// new SMSClient(0).sendMessage("04128663381", "Prueba Java!");
 		try {
 			SerialToGsm stg;
 			stg = new SerialToGsm("/dev/ttyUSB0");
@@ -22,16 +23,16 @@ public class SMSHandler {
 			new HiloMensajero(stg, "04262368741", msg);
 		} catch (NoSuchPortException e) {
 			e.printStackTrace();
-			MyLogger.escribirLog(SMSHandler.class.getName(),e.toString());
+			MyLogger.escribirLog(SMSHandler.class.getName(), e.toString());
 		} catch (PortInUseException e) {
 			e.printStackTrace();
-			MyLogger.escribirLog(SMSHandler.class.getName(),e.toString());
+			MyLogger.escribirLog(SMSHandler.class.getName(), e.toString());
 		} catch (UnsupportedCommOperationException e) {
 			e.printStackTrace();
-			MyLogger.escribirLog(SMSHandler.class.getName(),e.toString());
+			MyLogger.escribirLog(SMSHandler.class.getName(), e.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
-			MyLogger.escribirLog(SMSHandler.class.getName(),e.toString());
+			MyLogger.escribirLog(SMSHandler.class.getName(), e.toString());
 		}
 	}
 }

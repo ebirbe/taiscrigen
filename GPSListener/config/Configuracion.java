@@ -8,13 +8,13 @@ import java.util.Properties;
 
 import log.MyLogger;
 
-public class Configuracion extends Properties{
+public class Configuracion extends Properties {
 	private static final long serialVersionUID = -6962968299670902858L;
 	private final String nombreArchivo = "gpslistener.conf";
-	
+
 	public static String keyGsmDevice = "gsm_modem_dispositivo";
 	private String gsmDevice = "/dev/ttyUSB_utps_pcui";
-	
+
 	public static String keyHostPort = "puerto_escucha_gps";
 	private Integer hostPort = 5001;
 	private FileInputStream flujoEntrada;
@@ -63,10 +63,10 @@ public class Configuracion extends Properties{
 			setHostPort(Integer.parseInt((String) get(keyHostPort)));
 			setGsmDevice((String) get(keyGsmDevice));
 		} catch (FileNotFoundException e) {
-			MyLogger.escribirLog(this.getClass().getName(),e.toString());
+			MyLogger.escribirLog(this.getClass().getName(), e.toString());
 			e.printStackTrace();
 		} catch (IOException e) {
-			MyLogger.escribirLog(this.getClass().getName(),e.toString());
+			MyLogger.escribirLog(this.getClass().getName(), e.toString());
 			e.printStackTrace();
 		}
 	}
@@ -76,10 +76,10 @@ public class Configuracion extends Properties{
 			flujoSalida = new FileOutputStream(nombreArchivo);
 			store(flujoSalida, "Archivo de Configuracion para gpslistener.");
 		} catch (FileNotFoundException e) {
-			MyLogger.escribirLog(this.getClass().getName(),e.toString());
+			MyLogger.escribirLog(this.getClass().getName(), e.toString());
 			e.printStackTrace();
 		} catch (IOException e) {
-			MyLogger.escribirLog(this.getClass().getName(),e.toString());
+			MyLogger.escribirLog(this.getClass().getName(), e.toString());
 			e.printStackTrace();
 		}
 	}

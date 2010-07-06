@@ -24,7 +24,7 @@ public class FrameConfServidor extends JFrame {
 	private Configuracion config;
 	private Integer hostPort;
 	private String gsmModemPort;
-	
+
 	public Integer getHostPort() {
 		return hostPort;
 	}
@@ -54,11 +54,11 @@ public class FrameConfServidor extends JFrame {
 	private JPanel pnlBotones = new JPanel();
 
 	public FrameConfServidor(Configuracion cnf) {
-		
+
 		this.config = cnf;
 		hostPort = cnf.getHostPort();
 		gsmModemPort = cnf.getGsmDevice();
-		
+
 		txtPort.setText(hostPort.toString());
 		txtPort.setPreferredSize(new Dimension(50, 25));
 		pnlPort.add(lblPort);
@@ -74,22 +74,33 @@ public class FrameConfServidor extends JFrame {
 					// Coprobamos que sea un entero
 					Integer.parseInt(txtPort.getText());
 					config.put(Configuracion.keyHostPort, txtPort.getText());
-					config.put(Configuracion.keyGsmDevice, txtGsmDevice.getText());
+					config.put(Configuracion.keyGsmDevice,
+							txtGsmDevice.getText());
 					config.guardarConfiguracion();
-					JOptionPane.showMessageDialog(FrameConfServidor.this, "Configuracion guardada. Sera valida la proxima vez que inicie el programa.", "Configuracion Guardada", JOptionPane.PLAIN_MESSAGE);
+					JOptionPane
+							.showMessageDialog(
+									FrameConfServidor.this,
+									"Configuracion guardada. Sera valida la proxima vez que inicie el programa.",
+									"Configuracion Guardada",
+									JOptionPane.PLAIN_MESSAGE);
 				} catch (NumberFormatException e1) {
-					JOptionPane.showMessageDialog(servidor.FrameConfServidor.this, "Indique un puerto de host valido.", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(
+							servidor.FrameConfServidor.this,
+							"Indique un puerto de host valido.", "Error",
+							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				setGsmModemPort(txtGsmDevice.getText());
-				WindowEvent ev = new WindowEvent(FrameConfServidor.this, WindowEvent.WINDOW_CLOSED);
+				WindowEvent ev = new WindowEvent(FrameConfServidor.this,
+						WindowEvent.WINDOW_CLOSED);
 				FrameConfServidor.this.processWindowEvent(ev);
 			}
 		});
 		btnSalir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				processWindowEvent(new WindowEvent(FrameConfServidor.this, WindowEvent.WINDOW_CLOSING));
+				processWindowEvent(new WindowEvent(FrameConfServidor.this,
+						WindowEvent.WINDOW_CLOSING));
 			}
 		});
 		pnlBotones.setLayout(new GridBagLayout());
@@ -105,7 +116,8 @@ public class FrameConfServidor extends JFrame {
 		// Center the window
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frameSize = getSize();
-		setLocation((screenSize.width - frameSize.width)/2, (screenSize.height - frameSize.height)/2);
+		setLocation((screenSize.width - frameSize.width) / 2,
+				(screenSize.height - frameSize.height) / 2);
 		setVisible(true);
 	}
 }

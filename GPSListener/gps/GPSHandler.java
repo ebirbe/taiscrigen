@@ -109,10 +109,11 @@ public class  GPSHandler  extends Thread {
 	
 	private void AutoScroll(JTextArea texto, JScrollPane scrollpnl) {
 		// Si el autoscroll esta inactivo no se hace nada
-		if(GPSServer.wp.chkMniAutoScrool.getState() == false) return;
-		
-		texto.getCaret().setDot( texto.getText().length() );
-		scrollpnl.scrollRectToVisible(texto.getVisibleRect() );
+		if (GPSServer.wp.chkMniAutoScrool.getState() == false)
+			return;
+
+		texto.getCaret().setDot(texto.getText().length());
+		scrollpnl.scrollRectToVisible(texto.getVisibleRect());
 	}
 	private void comprobarReportes() {
 		String txt;

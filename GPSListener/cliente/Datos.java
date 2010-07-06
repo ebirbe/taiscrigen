@@ -5,6 +5,7 @@ public class Datos {
 	public String tlf_cliente;
 	public String tlf_cliente2;
 	public String nota = "";
+
 	public Datos(int id) {
 		switch (id) {
 		case 3201:// Jaky47
