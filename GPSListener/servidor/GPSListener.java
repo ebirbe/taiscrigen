@@ -1,6 +1,6 @@
 package servidor;
 
-import chat.clienteForaneo;
+import chat.ClienteForaneo;
 import log.MyLogger;
 import config.Configuracion;
 
@@ -33,6 +33,6 @@ public class GPSListener {
 		MyLogger.escribirLog(GPSListener.class.getName(),"Puerto de Internet: "+config.getHostPort());
 		MyLogger.escribirLog(GPSListener.class.getName(),"Dispositivo SMS: "+config.getGsmDevice());
 		new GPSServer(config.getHostPort(), config.getGsmDevice());
-		new clienteForaneo(GPSServer.wp.pnlForaneo);
+		new ClienteForaneo(GPSServer.wp.pnlForaneo);
 	}
 }
