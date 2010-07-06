@@ -17,10 +17,10 @@ public class HiloMensajero extends Thread {
 	}
 
 	public void run(){
-		MyLogger.escribirLog("Hilo de Mensaje Iniciado.");
+		MyLogger.escribirLog(this.getClass().getName(),"Hilo de Mensaje Iniciado.");
 		GPSServer.wp.lblStatus.setText("Hilo de Mensaje Iniciado.");
 		stg.sendSms(numero, msg);
-		MyLogger.escribirLog("Hilo de Mensaje Terminado.");
+		MyLogger.escribirLog(this.getClass().getName(),"Hilo de Mensaje Terminado.");
 		GPSServer.wp.lblStatus.setText("Hilo de Mensaje Terminado.");
 	}
 }

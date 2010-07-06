@@ -26,10 +26,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
+
+import chat.PanelChat;
 
 import log.MyLogger;
 
@@ -74,6 +77,9 @@ public class FramePrincipal extends JFrame {
 	JPanel pnlEnvio = new JPanel();
 	public JLabel lblStatus = new JLabel();
 	JPanel pnlStatus = new JPanel();
+	
+	JTabbedPane tpnlContenido = new JTabbedPane();
+	PanelChat pnlForaneo = new PanelChat();
 
 	String valorSeleccionado = new String();
 	int indiceSeleccionado;
@@ -243,9 +249,11 @@ public class FramePrincipal extends JFrame {
 		});
 		lblStatus.setPreferredSize(new Dimension(0,20));
 		pnlStatus.add(lblStatus);
+		tpnlContenido.add("Transmsiones Locales", splPanel);
+		tpnlContenido.add("Transmsiones Foraneas", pnlForaneo);
 		setJMenuBar(menuBar);
 		getContentPane().setLayout(new BorderLayout());
-		getContentPane().add(splPanel, BorderLayout.CENTER);
+		getContentPane().add(tpnlContenido, BorderLayout.CENTER);
 		getContentPane().add(lblStatus, BorderLayout.SOUTH);
 		setTitle("GPSListener");
 		// Size the window
@@ -316,7 +324,7 @@ public class FramePrincipal extends JFrame {
 			taPrivado.append(cmd+"\n");
 			txtComando.setText("");
 		} catch (Exception e) {
-			MyLogger.escribirLog(e.getMessage());
+			MyLogger.escribirLog(this.getClass().getName(),e.getMessage());
 			boolean encontrado = false;
 			for(i = 0; i < lstConectados.getModel().getSize(); i++) {
 				if(lstConectados.getModel().getElementAt(i).equals(valorSeleccionado)){

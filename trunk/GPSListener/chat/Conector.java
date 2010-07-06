@@ -43,7 +43,7 @@ public class Conector {
 			}
 			out.flush();
 		} catch (IOException ex) {
-			MyLogger.escribirLog(ex.toString());
+			MyLogger.escribirLog(this.getClass().getName(),ex.toString());
 			ex.printStackTrace();
 			exito = false;
 		}

@@ -1,5 +1,6 @@
 package servidor;
 
+import chat.clienteForaneo;
 import log.MyLogger;
 import config.Configuracion;
 
@@ -9,9 +10,9 @@ public class GPSListener {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		MyLogger.escribirLog("###################################################################");
-		MyLogger.escribirLog("#######################INICIANDO GPSLISTENER#######################");
-		MyLogger.escribirLog("###################################################################");
+		MyLogger.escribirLog(GPSListener.class.getName(),"###################################################################");
+		MyLogger.escribirLog(GPSListener.class.getName(),"#######################INICIANDO GPSLISTENER#######################");
+		MyLogger.escribirLog(GPSListener.class.getName(),"###################################################################");
 		
 		if(args.length > 0){
 			if(args[0].equals("--config")){
@@ -29,8 +30,9 @@ public class GPSListener {
 	}
 
 	private static void iniciarServidor() {
-		MyLogger.escribirLog("Puerto de Internet: "+config.getHostPort());
-		MyLogger.escribirLog("Dispositivo SMS: "+config.getGsmDevice());
+		MyLogger.escribirLog(GPSListener.class.getName(),"Puerto de Internet: "+config.getHostPort());
+		MyLogger.escribirLog(GPSListener.class.getName(),"Dispositivo SMS: "+config.getGsmDevice());
 		new GPSServer(config.getHostPort(), config.getGsmDevice());
+		new clienteForaneo(GPSServer.wp.pnlForaneo);
 	}
 }

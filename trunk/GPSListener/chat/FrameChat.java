@@ -1,33 +1,15 @@
 package chat;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 public class FrameChat extends JFrame {
 	private static final long serialVersionUID = -5777423832543978363L;
-	JTextArea txtRespuesta = new JTextArea();
-	JScrollPane jspRespuesta = new JScrollPane();
-	JTextField txtEnvio = new JTextField();
-	JButton btnEnviar = new JButton("Enviar");
-	JPanel pnlEnvio = new JPanel();
+	PanelChat pc = new PanelChat();
 	public FrameChat() {
-		txtEnvio.setPreferredSize(new Dimension(500, 20));
-		jspRespuesta.setPreferredSize(new Dimension(800,600));
-		jspRespuesta.getViewport().add(txtRespuesta);
-		pnlEnvio.setLayout(new FlowLayout());
-		pnlEnvio.add(txtEnvio);
-		pnlEnvio.add(btnEnviar);
-		getContentPane().setLayout(new BorderLayout());
-		getContentPane().add(jspRespuesta, BorderLayout.CENTER);
-		getContentPane().add(pnlEnvio, BorderLayout.SOUTH);
+		setPreferredSize(new Dimension(800,600));
+		getContentPane().add(pc);
 		pack();
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
