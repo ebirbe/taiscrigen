@@ -25,6 +25,7 @@ public class Contador {
 	public static synchronized void contar(String s) {
 		String[] v = dividirMensaje(s);
 		for (int i = 0; i < v.length; i++) {
+			MyLogger.escribirLog(Contador.class.getName(), "[COUNTING]"+v[i]);
 			comprobarMensaje(v[i]);
 			crearCarpeta();
 			abrirArchivo();
@@ -93,7 +94,7 @@ public class Contador {
 
 	public static String[] dividirMensaje(String s) {
 		Pattern patron = Pattern.compile(">*<");
-		String[] v = patron.split(s);
+		String[] v = patron.split(s.trim());
 		for (int i = 0; i < v.length; i++) {
 			if (v[i].indexOf(">") != -1) {
 				v[i] = v[i].concat("<");
@@ -107,7 +108,7 @@ public class Contador {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String s = ">REV011591248634+1016377-0674499600000012;ID=3205<>REV011591248634+1016377-0674499600000012;ID=3205<3201";
+		String s = ">REV011591248634+1016377-0674499600000012;ID=3205<>REV011591248634+1016377-0674499600000012;ID=3205<3201\n\r";
 		String[] v = dividirMensaje(s);
 		for (int i = 0; i < v.length; i++) {
 			System.out.println(v[i]);
