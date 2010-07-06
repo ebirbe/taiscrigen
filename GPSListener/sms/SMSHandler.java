@@ -22,16 +22,16 @@ public class SMSHandler {
 			new HiloMensajero(stg, "04262368741", msg);
 		} catch (NoSuchPortException e) {
 			e.printStackTrace();
-			MyLogger.escribirLog(e.toString());
+			MyLogger.escribirLog(SMSHandler.class.getName(),e.toString());
 		} catch (PortInUseException e) {
 			e.printStackTrace();
-			MyLogger.escribirLog(e.toString());
+			MyLogger.escribirLog(SMSHandler.class.getName(),e.toString());
 		} catch (UnsupportedCommOperationException e) {
 			e.printStackTrace();
-			MyLogger.escribirLog(e.toString());
+			MyLogger.escribirLog(SMSHandler.class.getName(),e.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
-			MyLogger.escribirLog(e.toString());
+			MyLogger.escribirLog(SMSHandler.class.getName(),e.toString());
 		}
 	}
 }

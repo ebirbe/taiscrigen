@@ -42,7 +42,7 @@ public class Chat {
 		}
 	}
 	private static void imprimir(String msj){
-		f.txtRespuesta.append(msj);
-		MyLogger.escribirLog(msj);
+		f.pc.agregar(msj);
+		MyLogger.escribirLog(Chat.class.getName(),msj);
 	}
 }

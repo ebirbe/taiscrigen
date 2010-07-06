@@ -59,7 +59,7 @@ public class SerialToGsm{
 		try {
 			// clean serial port input buffer
 			in.skip(in.available());
-			MyLogger.escribirLog("=> " + s);
+			MyLogger.escribirLog(this.getClass().getName(),"=> " + s);
 			s = s + "\r";         // add CR
 			out.write(s.getBytes());
 			out.flush();            
@@ -89,7 +89,7 @@ public class SerialToGsm{
 				}                                         
 				Thread.sleep(100); // delay 1/10 sec
 			}
-			MyLogger.escribirLog("<= " + strIn);
+			MyLogger.escribirLog(this.getClass().getName(),"<= " + strIn);
 
 			if (strIn.length() == 0) {
 				return "ERROR: len 0";
@@ -97,7 +97,7 @@ public class SerialToGsm{
 			return strIn;
 		}
 		catch (Exception e) {                  
-			MyLogger.escribirLog("Env/Rec Exception " + e);
+			MyLogger.escribirLog(this.getClass().getName(),"Env/Rec Exception " + e);
 			return "ERROR: send e recv Exception";
 		}
 	}
@@ -105,7 +105,7 @@ public class SerialToGsm{
 	synchronized public String sendSms (String numToSend, String whatToSend) {
 		String s = new String();
 		if(whatToSend.length() > 140){
-			MyLogger.escribirLog("Mensaje muy largo: Tiene " + whatToSend.length() + " caracteres.");
+			MyLogger.escribirLog(this.getClass().getName(),"Mensaje muy largo: Tiene " + whatToSend.length() + " caracteres.");
 			return "ERROR";
 		}
 		s = sendAndRecv("AT+CMGS=\""+numToSend+"\"\r", 30);
@@ -166,7 +166,7 @@ public class SerialToGsm{
 
 		// extract string
 		str = strGsm.substring(startPoint, endPoint);
-		MyLogger.escribirLog("String to be decoded :" + str);
+		MyLogger.escribirLog(this.getClass().getName(),"String to be decoded :" + str);
 
 		/*ComputeSmsData sms = new ComputeSmsData();
         sms.setRcvdPdu(str);

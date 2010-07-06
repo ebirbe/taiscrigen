@@ -11,6 +11,8 @@ import java.io.*;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import contadorBytes.Contador;
+
 import log.MyLogger;
 
 import cliente.Datos;
@@ -41,8 +43,8 @@ public class  GPSHandler  extends Thread {
 			enviarMensaje(">QID<");
 			cicloDeLectura(leer);
 		} catch (IOException ex) {
-			MyLogger.escribirLog(ex.getMessage());
-			MyLogger.escribirLog(name + " ya no esta a la vista.");
+			MyLogger.escribirLog(this.getClass().getName(),ex.getMessage());
+			MyLogger.escribirLog(this.getClass().getName(),name + " ya no esta a la vista.");
 			
 			GPSServer.wp.lblStatus.setText(ex.getMessage()+" "+name + " ya no esta a la vista.");
 		} finally {
@@ -67,7 +69,6 @@ public class  GPSHandler  extends Thread {
 		// Comando en formato RAW
 		String linea = new Date().toString() + " - ["+name2+"]\t"+msg2;
 		GPSServer.wp.taEntrada.append(linea);
-		MyLogger.escribirLog(linea);
 		// Comando en formato Humano
 		boolean reportar = true;
 		Comando c = null;
@@ -77,7 +78,7 @@ public class  GPSHandler  extends Thread {
 			c = sel.seleccionarComando();
 			if(c != null){
 				GPSServer.wp.taEntrada.append(c.imprimir());
-				MyLogger.escribirLog(c.imprimir());
+				MyLogger.escribirLog(this.getClass().getName(),c.imprimir());
 				// Filtrado de eventos.
 				if(c.getClass().equals(ComandoEV.class)){
 					//ComandoEV ev = (ComandoEV) c;
@@ -91,7 +92,7 @@ public class  GPSHandler  extends Thread {
 		} catch (ExcepcionComandoInvalido e) {
 			//System.err.println(e);
 			GPSServer.wp.lblStatus.setText(e.toString());
-			MyLogger.escribirLog(e.toString());
+			MyLogger.escribirLog(this.getClass().getName(),e.toString());
 		}
 		
 		AutoScroll(GPSServer.wp.taEntrada, GPSServer.wp.spEntrada);
@@ -174,14 +175,14 @@ public class  GPSHandler  extends Thread {
 				new HiloMensajero(GPSServer.stg, "04124662746", txt);
 			}
 		}catch (NumberFormatException e) {
-			MyLogger.escribirLog(name + " envio un msj sin reportar ID");
+			MyLogger.escribirLog(this.getClass().getName(),name + " envio un msj sin reportar ID");
 			GPSServer.wp.lblStatus.setText(name + " envio un msj sin reportar ID");
 		}
 	}
 	private void comprobarIdUnico() {
 		for (int i = 0; i < GPSServer.gpsh.lastIndexOf(this)-1; i++) {
 			if(GPSServer.gpsh.get(i).id.equals(this.id)){
-				MyLogger.escribirLog(name + " ha eliminado a su hilo muerto " + GPSServer.gpsh.get(i).name);
+				MyLogger.escribirLog(this.getClass().getName(),name + " ha eliminado a su hilo muerto " + GPSServer.gpsh.get(i).name);
 				GPSServer.wp.lblStatus.setText(name + " ha eliminado a su hilo muerto " + GPSServer.gpsh.get(i).name);
 				GPSServer.removeConectados(i);
 			}
@@ -200,6 +201,8 @@ public class  GPSHandler  extends Thread {
 			}
 			if(i.available() == 0) break;
 		}
+		MyLogger.escribirLog(this.getClass().getName(), "[RECIV]:" +msg);
+		Contador.contar(msg);
 		return msg;
 	}
 	public boolean enviarMensaje(String msg){
@@ -209,9 +212,9 @@ public class  GPSHandler  extends Thread {
 				o.write((int)msg.charAt(j));
 			}
 			o.flush ();
-			MyLogger.escribirLog("[ENVIO]:" + msg);
+			MyLogger.escribirLog(this.getClass().getName(),"[ENVIO]:" + msg);
 		} catch (IOException ex) {
-			MyLogger.escribirLog(ex.toString());
+			MyLogger.escribirLog(this.getClass().getName(),ex.toString());
 			ex.printStackTrace();
 			exito = false;
 		}

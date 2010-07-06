@@ -63,10 +63,10 @@ public class Configuracion extends Properties{
 			setHostPort(Integer.parseInt((String) get(keyHostPort)));
 			setGsmDevice((String) get(keyGsmDevice));
 		} catch (FileNotFoundException e) {
-			MyLogger.escribirLog(e.toString());
+			MyLogger.escribirLog(this.getClass().getName(),e.toString());
 			e.printStackTrace();
 		} catch (IOException e) {
-			MyLogger.escribirLog(e.toString());
+			MyLogger.escribirLog(this.getClass().getName(),e.toString());
 			e.printStackTrace();
 		}
 	}
@@ -76,10 +76,10 @@ public class Configuracion extends Properties{
 			flujoSalida = new FileOutputStream(nombreArchivo);
 			store(flujoSalida, "Archivo de Configuracion para gpslistener.");
 		} catch (FileNotFoundException e) {
-			MyLogger.escribirLog(e.toString());
+			MyLogger.escribirLog(this.getClass().getName(),e.toString());
 			e.printStackTrace();
 		} catch (IOException e) {
-			MyLogger.escribirLog(e.toString());
+			MyLogger.escribirLog(this.getClass().getName(),e.toString());
 			e.printStackTrace();
 		}
 	}
