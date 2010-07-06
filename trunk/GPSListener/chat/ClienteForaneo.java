@@ -51,7 +51,7 @@ public class ClienteForaneo extends Thread {
 	private void imprimir(String msj) {
 		String[] v = Contador.dividirMensaje(msj);
 		for (int i = 0; i < v.length; i++) {
-			pc.agregar(v[i]);
+			pc.agregar(v[i]+"\n");
 			MyLogger.escribirLog(Chat.class.getName(), v[i]);
 			Contador.contar(v[i]);
 		}

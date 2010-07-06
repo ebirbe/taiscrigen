@@ -22,7 +22,7 @@ public class Chat {
 			m = c.leerMensaje();
 			imprimir(m);
 			imprimir("Enviando inicio de sesion...");
-			if(c.enviarMensaje("Idenficacion,jaky,QWPOMNFGTREHORMWRFT"))
+			if(c.enviarMensaje("Soy,jaky,QWPOMNFGTREHORMWRFT"))
 				imprimir("Enviado con exito.\n");
 			else
 				imprimir("No se pudo enviar el inicio de sesion.\n");
