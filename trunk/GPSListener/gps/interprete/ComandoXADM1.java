@@ -2,7 +2,10 @@ package gps.interprete;
 
 public class ComandoXADM1 extends Comando {
 
-	private String nivel, fwFamily, fwVersion, fwVersionTipo, estadoSim, estadoGsm, rssi, gprsAttach, estadoGprs, numeroSatelite, fuente, edad, estadoTracking, gpiosMask, ioState, resetDiagnostic, dpActual, keepAlive;
+	private String nivel, fwFamily, fwVersion, fwVersionTipo, estadoSim,
+			estadoGsm, rssi, gprsAttach, estadoGprs, numeroSatelite, fuente,
+			edad, estadoTracking, gpiosMask, ioState, resetDiagnostic,
+			dpActual, keepAlive;
 
 	public String getNivel() {
 		return nivel;
@@ -161,68 +164,78 @@ public class ComandoXADM1 extends Comando {
 	@Override
 	public void desglosarComando() {
 		// A BB CC DD E F GG H I JJ K L M NN OO PP QQ RRR
-		//System.out.println(texto);
-		if(texto.indexOf(";") > -1) texto = texto.substring(0,texto.indexOf(";"));
-		
-		nivel = texto.substring(0,1);
-		fwFamily = texto.substring(1,3);
+		// System.out.println(texto);
+		if (texto.indexOf(";") > -1)
+			texto = texto.substring(0, texto.indexOf(";"));
+
+		nivel = texto.substring(0, 1);
+		fwFamily = texto.substring(1, 3);
 		fwVersion = texto.substring(3, 5);
-		fwVersionTipo = texto.substring(5,7);
-		estadoSim = texto.substring(7,8);
-		estadoGsm = texto.substring(8,9);
-		rssi = texto.substring(9,11);
-		gprsAttach = texto.substring(11,12);
-		estadoGprs = texto.substring(12,13);
-		numeroSatelite = texto.substring(13,15);
-		fuente = texto.substring(15,16);
-		edad = texto.substring(16,17);
-		estadoTracking = texto.substring(17,18);
-		gpiosMask = texto.substring(18,20);
-		ioState = texto.substring(20,22);
-		resetDiagnostic = texto.substring(22,24);
-		if(texto.length() == 29) {
-			dpActual = texto.substring(24,26);
-			keepAlive = texto.substring(26,29);
-		}else{
-			dpActual = "0"+texto.substring(24,25);
-			keepAlive = texto.substring(25,28);
+		fwVersionTipo = texto.substring(5, 7);
+		estadoSim = texto.substring(7, 8);
+		estadoGsm = texto.substring(8, 9);
+		rssi = texto.substring(9, 11);
+		gprsAttach = texto.substring(11, 12);
+		estadoGprs = texto.substring(12, 13);
+		numeroSatelite = texto.substring(13, 15);
+		fuente = texto.substring(15, 16);
+		edad = texto.substring(16, 17);
+		estadoTracking = texto.substring(17, 18);
+		gpiosMask = texto.substring(18, 20);
+		ioState = texto.substring(20, 22);
+		resetDiagnostic = texto.substring(22, 24);
+		if (texto.length() == 29) {
+			dpActual = texto.substring(24, 26);
+			keepAlive = texto.substring(26, 29);
+		} else {
+			dpActual = "0" + texto.substring(24, 25);
+			keepAlive = texto.substring(25, 28);
 		}
 	}
 
 	@Override
 	public String imprimir() {
 
-		impresion ="";
-		impresion += "Nivel Diagnostico: "+nivel+"\n";
-		impresion += "Firmware: "+fwFamily+"."+fwVersion+" ("+fwVersionTipo+")\n";
-		impresion += "Estado de SIM: "+obtenerEstadoSim(estadoSim)+"\n";
-		impresion += "Estado GSM: "+obtenerEstadoGsm(estadoGsm)+"\n";
-		impresion += "Fuerza de Señal (RSSI): "+Integer.parseInt(rssi)+"/31\n";
-		impresion += "GPRS unido: "+obtenerGprsAttached(gprsAttach)+"\n";
-		impresion += "Estado GPRS: "+obtenerEstadoGprs(estadoGprs)+"\n";
-		impresion += "Numero Satelites: "+Integer.parseInt(numeroSatelite)+"\n";
-		impresion += "Fuente: "+obtenerFuente(fuente)+"\n";
-		impresion += "Edad: "+obtenerEdad(edad)+"\n";
-		impresion += "Estado de Rastreo: "+obtenerEstadoRastreo(estadoTracking)+"\n";
-		impresion += "Mascara GPIOS: "+gpiosMask+"\n";
-		impresion += "Estado de E/S: "+ioState+"\n";
-		impresion += "Dest. Diag. de Reset: "+obtenerDiagnosticoReset(resetDiagnostic)+"\n";
-		impresion += "DP actual: DP"+dpActual+"\n";
-		impresion += "Tiempo de KeepAlive: Cada "+Integer.parseInt(keepAlive)+" minutos.\n";
+		impresion = "";
+		impresion += "Nivel Diagnostico: " + nivel + "\n";
+		impresion += "Firmware: " + fwFamily + "." + fwVersion + " ("
+				+ fwVersionTipo + ")\n";
+		impresion += "Estado de SIM: " + obtenerEstadoSim(estadoSim) + "\n";
+		impresion += "Estado GSM: " + obtenerEstadoGsm(estadoGsm) + "\n";
+		impresion += "Fuerza de Señal (RSSI): " + Integer.parseInt(rssi)
+				+ "/31\n";
+		impresion += "GPRS unido: " + obtenerGprsAttached(gprsAttach) + "\n";
+		impresion += "Estado GPRS: " + obtenerEstadoGprs(estadoGprs) + "\n";
+		impresion += "Numero Satelites: " + Integer.parseInt(numeroSatelite)
+				+ "\n";
+		impresion += "Fuente: " + obtenerFuente(fuente) + "\n";
+		impresion += "Edad: " + obtenerEdad(edad) + "\n";
+		impresion += "Estado de Rastreo: "
+				+ obtenerEstadoRastreo(estadoTracking) + "\n";
+		impresion += "Mascara GPIOS: " + gpiosMask + "\n";
+		impresion += "Estado de E/S: " + ioState + "\n";
+		impresion += "Dest. Diag. de Reset: "
+				+ obtenerDiagnosticoReset(resetDiagnostic) + "\n";
+		impresion += "DP actual: DP" + dpActual + "\n";
+		impresion += "Tiempo de KeepAlive: Cada " + Integer.parseInt(keepAlive)
+				+ " minutos.\n";
 
 		return impresion;
 	}
 
 	protected String obtenerDiagnosticoReset(String resetDiagnostic2) {
-		if(resetDiagnostic2.equals("UU")) return "Inactivo.";
-		if( ! resetDiagnostic2.substring(0,1).equals("A")) resetDiagnostic2 = "P"+resetDiagnostic2;
-		return "D"+resetDiagnostic2;
+		if (resetDiagnostic2.equals("UU"))
+			return "Inactivo.";
+		if (!resetDiagnostic2.substring(0, 1).equals("A"))
+			resetDiagnostic2 = "P" + resetDiagnostic2;
+		return "D" + resetDiagnostic2;
 	}
 
 	protected String obtenerEstadoGprs(String estadoGprs2) {
 		String st = "";
 
-		if(estadoGprs2.equals("E")) return "ERROR. (Use QXANS)";
+		if (estadoGprs2.equals("E"))
+			return "ERROR. (Use QXANS)";
 
 		int iSt = Integer.parseInt(estadoGprs2);
 		switch (iSt) {
@@ -248,7 +261,7 @@ public class ComandoXADM1 extends Comando {
 			st = "No hay red.";
 			break;
 		default:
-			st = "("+estadoGprs2 + ") Desconocido.";
+			st = "(" + estadoGprs2 + ") Desconocido.";
 			break;
 		}
 		return st;
@@ -294,7 +307,8 @@ public class ComandoXADM1 extends Comando {
 		return st;
 	}
 
-	protected String obtenerEstadoSim(String estadoSim2) throws NumberFormatException{
+	protected String obtenerEstadoSim(String estadoSim2)
+			throws NumberFormatException {
 		String st = "";
 		int iSt = Integer.parseInt(estadoSim2);
 		switch (iSt) {

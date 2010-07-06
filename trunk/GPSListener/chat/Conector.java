@@ -12,38 +12,42 @@ public class Conector {
 	Socket s;
 	BufferedInputStream in;
 	BufferedOutputStream out;
-	
-	public Conector(String host, int port) throws UnknownHostException, IOException {
+
+	public Conector(String host, int port) throws UnknownHostException,
+			IOException {
 		s = new Socket(host, port);
 		in = new BufferedInputStream(s.getInputStream());
 		out = new BufferedOutputStream(s.getOutputStream());
 	}
-	
-	public String leerMensaje() throws IOException{
+
+	public String leerMensaje() throws IOException {
 		String msg = new String();
-		while(true){
+		while (true) {
 			Character c = (char) in.read();
-			Integer inte = (int)c;
-			if(inte<0||inte>127) throw new IOException("Envio caracter de salida. ("+inte+")");
+			Integer inte = (int) c;
+			if (inte < 0 || inte > 127)
+				throw new IOException("Envio caracter de salida. (" + inte
+						+ ")");
 
 			msg += c.toString();
-			if(in.available() == 0 && !c.toString().equals("\n")){
+			if (in.available() == 0 && !c.toString().equals("\n")) {
 				msg += "\n";
 			}
-			if(in.available() == 0) break;
+			if (in.available() == 0)
+				break;
 		}
 		return msg;
 	}
-	
-	public boolean enviarMensaje(String msg){
+
+	public boolean enviarMensaje(String msg) {
 		boolean exito = true;
 		try {
-			for(int j=0;j < msg.length();j++){
-				out.write((byte)msg.charAt(j));
+			for (int j = 0; j < msg.length(); j++) {
+				out.write((byte) msg.charAt(j));
 			}
 			out.flush();
 		} catch (IOException ex) {
-			MyLogger.escribirLog(this.getClass().getName(),ex.toString());
+			MyLogger.escribirLog(this.getClass().getName(), ex.toString());
 			ex.printStackTrace();
 			exito = false;
 		}

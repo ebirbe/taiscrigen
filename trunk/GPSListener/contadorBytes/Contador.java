@@ -25,7 +25,7 @@ public class Contador {
 	public static synchronized void contar(String s) {
 		String[] v = dividirMensaje(s);
 		for (int i = 0; i < v.length; i++) {
-			MyLogger.escribirLog(Contador.class.getName(), "[COUNTING]"+v[i]);
+			MyLogger.escribirLog(Contador.class.getName(), "[COUNTING]" + v[i]);
 			comprobarMensaje(v[i]);
 			crearCarpeta();
 			abrirArchivo();
