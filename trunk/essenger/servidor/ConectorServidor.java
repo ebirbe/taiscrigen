@@ -24,6 +24,7 @@ public class ConectorServidor{
 			Amigo a = new Amigo(s);
 			listaConectados.add(a);
 			a.start();
+			System.out.println(s.getInetAddress());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
