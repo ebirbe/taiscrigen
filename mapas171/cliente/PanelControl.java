@@ -1,4 +1,5 @@
 package org.mapas171.cliente;
+
 import java.awt.GridLayout;
 import java.awt.Panel;
 
@@ -44,22 +45,22 @@ public class PanelControl extends Panel {
 
 	private void cargarIconos() {
 		icoArriba = new ImageIcon(PanelControl.this.getClass().getClassLoader()
-				.getResource("up.png"));
+				.getResource("org/mapas171/media/up.png"));
 		arriba.setIcon(icoArriba);
 		icoAbajo = new ImageIcon(this.getClass().getClassLoader()
-				.getResource("down.png"));
+				.getResource("org/mapas171/media/down.png"));
 		abajo.setIcon(icoAbajo);
 		icoIzquierda = new ImageIcon(this.getClass().getClassLoader()
-				.getResource("left.png"));
+				.getResource("org/mapas171/media/left.png"));
 		izquierda.setIcon(icoIzquierda);
 		icoDerecha = new ImageIcon(this.getClass().getClassLoader()
-				.getResource("right.png"));
+				.getResource("org/mapas171/media/right.png"));
 		derecha.setIcon(icoDerecha);
 		icoMas = new ImageIcon(this.getClass().getClassLoader()
-				.getResource("in.png"));
+				.getResource("org/mapas171/media/in.png"));
 		zMas.setIcon(icoMas);
 		icoMenos = new ImageIcon(this.getClass().getClassLoader()
-				.getResource("out.png"));
+				.getResource("org/mapas171/media/out.png"));
 		zMenos.setIcon(icoMenos);
 	}
 }

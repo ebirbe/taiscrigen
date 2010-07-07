@@ -1,4 +1,5 @@
 package org.mapas171.cliente;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -57,7 +58,7 @@ public class Ubicacion extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Localizacion");
 		setIconImage(new ImageIcon(this.getClass().getClassLoader()
-				.getResource("world.png")).getImage());
+				.getResource("org/mapas171/media/world.png")).getImage());
 		getContentPane().setLayout(new BorderLayout());
 		setResizable(false);
 		getContentPane().add(pnlLateral, BorderLayout.WEST);
@@ -67,6 +68,7 @@ public class Ubicacion extends JFrame {
 		setVisible(true);
 		creador.start();
 	}
+
 	public static void main(String[] args) {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		JDialog.setDefaultLookAndFeelDecorated(true);

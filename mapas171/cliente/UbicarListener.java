@@ -1,4 +1,5 @@
 package org.mapas171.cliente;
+
 import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,7 +42,7 @@ public class UbicarListener extends ListenerDeControl {
 						lat = Double.parseDouble(res.getString(2));
 						lon = Double.parseDouble(res.getString(3));
 					}
-					UbicarListener.this.mapa.dibujar(lat, lon);
+					UbicarListener.this.mapa.dibujar(lat, lon, true);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
