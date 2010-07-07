@@ -1,4 +1,5 @@
 package org.mapas171.cliente;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,15 +26,18 @@ public class Mapa extends Thread {
 	JLabel status;
 	PanelControl pnc;
 	Coordinate coor;
+	Coordinate coorAnterior = new Coordinate();
 	URL icono;
 
 	private final double ESPACIADO = 1000;
-	private int zoom = 15;
+	private int zoom = 14;
 
 	public Mapa(Ubicacion ventana) {
-		icono = this.getClass().getClassLoader().getResource("wait.gif");
+		icono = this.getClass().getClassLoader()
+				.getResource("org/mapas171/media/wait.gif");
 		try {
 			coor = new Coordinate("Maracay", "");
+			coorAnterior = new Coordinate("Maracay", "");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -44,14 +48,14 @@ public class Mapa extends Thread {
 
 	@Override
 	public void run() {
-		dibujar(null, null);
+		dibujar(null, null, false);
 	}
 
 	public void subir() {
 		try {
 			// System.out.println(zoom/ESPACIADO);
 			coor.setLatitude(coor.getLatitude() + (zoom / ESPACIADO));
-			dibujar(coor.getLatitude(), coor.getLongitude());
+			dibujar(coor.getLatitude(), coor.getLongitude(), false);
 		} catch (CoordinateRangeException e) {
 			e.printStackTrace();
 		}
@@ -61,7 +65,7 @@ public class Mapa extends Thread {
 		try {
 			// System.out.println(zoom/ESPACIADO);
 			coor.setLatitude(coor.getLatitude() - (zoom / ESPACIADO));
-			dibujar(coor.getLatitude(), coor.getLongitude());
+			dibujar(coor.getLatitude(), coor.getLongitude(), false);
 		} catch (CoordinateRangeException e) {
 			e.printStackTrace();
 		}
@@ -71,7 +75,7 @@ public class Mapa extends Thread {
 		try {
 			// System.out.println(zoom/ESPACIADO);
 			coor.setLongitude(coor.getLongitude() + (zoom / ESPACIADO));
-			dibujar(coor.getLatitude(), coor.getLongitude());
+			dibujar(coor.getLatitude(), coor.getLongitude(), false);
 		} catch (CoordinateRangeException e) {
 			e.printStackTrace();
 		}
@@ -81,7 +85,7 @@ public class Mapa extends Thread {
 		try {
 			// System.out.println(zoom/ESPACIADO);
 			coor.setLongitude(coor.getLongitude() - (zoom / ESPACIADO));
-			dibujar(coor.getLatitude(), coor.getLongitude());
+			dibujar(coor.getLatitude(), coor.getLongitude(), false);
 		} catch (CoordinateRangeException e) {
 			e.printStackTrace();
 		}
@@ -89,27 +93,28 @@ public class Mapa extends Thread {
 
 	public void acercar() {
 		zoom += 1;
-		dibujar(null, null);
+		dibujar(null, null, false);
 	}
 
 	public void alejar() {
 		zoom -= 1;
-		dibujar(null, null);
+		dibujar(null, null, false);
 	}
 
-	public void dibujar(Double lat, Double lon) {
+	public void dibujar(Double lat, Double lon, boolean moverMarcador) {
 		boolean exito = false;
 		status.setIcon(new ImageIcon(icono));
 		status.setText("Cargando Mapa...");
 		pnc.setEnabled(false);
 		try {
-			if (lat != null || lat != null)
+			Marker punto;
+			ArrayList<Marker> listaPuntos;
+			if (moverMarcador && (lat != null || lat != null)) {
+				coorAnterior = new Coordinate(lat, lon);
 				coor = new Coordinate(lat, lon);
-			System.out.println(coor.getLatitude() + " \t "
-					+ coor.getLongitude());
-			Marker punto = new Marker(Colors.ColorBlue, coor, Colors.SizeMid,
-					'p');
-			ArrayList<Marker> listaPuntos = new ArrayList<Marker>();
+			}
+			punto = new Marker(Colors.ColorBlue, coorAnterior, Colors.SizeMid, 'p');
+			listaPuntos = new ArrayList<Marker>();
 			listaPuntos.add(punto);
 			MarkersMap mapa = new MarkersMap("", coor, zoom, listaPuntos);
 			mapa.setDimmension(new Dimension(640, 640));
